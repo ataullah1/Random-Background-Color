@@ -7,7 +7,9 @@
   padding: 0;
   box-sizing: border-box;
 }
-
+body {
+  position: relative;
+}
 /* Styling the main container */
 .main {
   background-color: gray;
@@ -79,6 +81,9 @@
   text-align: center;
   font-weight: bold;
   letter-spacing: 2px;
+  background-color: gray;
+  color: #ddff00;
+  border: #42afac 1px solid;
 }
 .Copy {
   background-color: #41ba45;
@@ -86,10 +91,52 @@
   font-size: 15px;
   padding: 13px 12px;
   cursor: pointer;
+  box-shadow: rgba(108, 2, 110, 0.753) 0px 1px 3px,
+    rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
 .Copy:focus {
   background-color: #42afac;
 }
+
+.toast_massage {
+  padding: 15px 20px;
+  font-weight: bold;
+  color: #121212;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #42afac;
+  letter-spacing: 2px;
+
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+  cursor: pointer;
+  border-bottom: #ddff00 3px solid;
+  animation: toasmassageanimet_in 0.5s ease-in;
+}
+@keyframes toasmassageanimet_in {
+  from {
+    transform: translateX(200px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+.animet_out {
+  animation: animetOut 1s ease-out;
+}
+@keyframes animetOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(500px);
+    opacity: 0;
+  }
+}
+
 /* Media query for responsiveness */
 @media (max-width: 700px) {
   .h1 {

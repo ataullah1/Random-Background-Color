@@ -1,3 +1,5 @@
+let div = null;
+
 window.onload = main;
 
 function main() {
@@ -10,7 +12,7 @@ function main() {
   btn.addEventListener('click', function () {
     bgColorChange.style.backgroundColor = generateRandomColor();
     colorCode.value = generateRandomColor().toUpperCase();
-    HexColorCopy.innerHTML='Copy Now'
+    HexColorCopy.innerHTML = 'Copy Now';
   });
 
   // Random change background color event
@@ -20,7 +22,28 @@ function main() {
   // Color Code copy Event
   HexColorCopy.addEventListener('click', function () {
     navigator.clipboard.writeText(colorCode.value);
-    HexColorCopy.innerHTML='Copyed'
+    HexColorCopy.innerHTML = 'Copied';
+    if (div != null) {
+      div.remove();
+      div = null;
+    }
+    codeisCopied(`(${colorCode.value}) is copied`);
+  });
+}
+
+// Copied Toast Massage
+
+function codeisCopied(massage) {
+  div = document.createElement('div');
+  const className = (div.className = 'toast_massage');
+  div.innerText = massage;
+  document.body.appendChild(div);
+  div.addEventListener('click', function () {
+    div.classList.add('animet_out');
+    this.addEventListener('animationend', function () {
+      div.remove();
+      div = null;
+    });
   });
 }
 
