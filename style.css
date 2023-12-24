@@ -1,0 +1,64 @@
+/* Importing the 'Ubuntu' font from Google Fonts */
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+
+/* Resetting some default styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Styling the main container */
+.main {
+  background-color: gray;
+  height: 100vh;
+  width: 100%;
+}
+
+/* Styling for the heading */
+.h1 {
+  padding: 200px 20px 100px 20px;
+  text-align: center;
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 70px;
+  font-weight: bold;
+  color: #121212;
+  letter-spacing: 5px;
+  text-shadow: -1px 1px 0 #41ba45, 1px 1px 0 #c63d2b, 1px -1px 0 #42afac,
+    -1px -1px 0 #c6c23f;
+}
+
+/* Styling for the button */
+#btn {
+  padding: 15px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  display: block;
+  margin: auto;
+  box-shadow: rgba(229, 173, 173, 0.4) 0px 2px 4px,
+    rgba(251, 190, 190, 0.3) 0px 7px 13px -3px,
+    rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  border: none;
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 18px;
+  color: #121212;
+  letter-spacing: 5px;
+  text-shadow: 2px 7px 5px rgba(0, 0, 0, 0.3),
+    0px -4px 10px rgba(255, 255, 255, 0.3);
+}
+
+/* Styling for the button on hover */
+#btn:hover {
+  background-color: #42afac;
+  text-shadow: 2px 7px 5px rgba(0, 0, 0, 0.3), 0px -4px 10px rgb(255, 255, 255);
+}
+
+/* Media query for responsiveness */
+@media (max-width: 700px) {
+  .h1 {
+    font-size: 40px;
+  }
+  #btn {
+    padding: 12px 18px;
+  }
+}
