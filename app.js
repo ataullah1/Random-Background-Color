@@ -4,25 +4,31 @@ function main() {
   const bgColorChange = document.querySelector('.main');
   const btn = document.querySelector('#btn');
   const colorCode = document.querySelector('.colorCode');
+  const HexColorCopy = document.getElementById('HEXcopy');
 
+  // Button click Random change background color
   btn.addEventListener('click', function () {
     bgColorChange.style.backgroundColor = generateRandomColor();
     colorCode.value = generateRandomColor().toUpperCase();
+    HexColorCopy.innerHTML='Copy Now'
   });
 
+  // Random change background color event
   bgColorChange.style.backgroundColor = generateRandomColor();
   colorCode.value = generateRandomColor().toUpperCase();
+
+  // Color Code copy Event
+  HexColorCopy.addEventListener('click', function () {
+    navigator.clipboard.writeText(colorCode.value);
+    HexColorCopy.innerHTML='Copyed'
+  });
 }
 
+//  Color code genaret
 function generateRandomColor() {
   const red = Math.floor(Math.random() * 255);
   const blue = Math.floor(Math.random() * 255);
   const green = Math.floor(Math.random() * 255);
-  let rgbcolorgenaret = function () {
-    const rgb = `rgb(${red},${green},${blue})`;
-    let rgbinput = document.getElementById('RGBColor');
-    rgbinput.value
-  };
   return `#${red.toString(16)}${green.toString(16)}${blue.toString(16)}`;
 }
 
