@@ -5,14 +5,22 @@ window.onload = main;
 function main() {
   const bgColorChange = document.querySelector('.main');
   const btn = document.querySelector('#btn');
-  const colorCode = document.querySelector('.colorCode');
+  const hexColorCode = document.querySelector('.colorCode');
+  const rgbColorCode = document.getElementById('RGBColor');
   const HexColorCopy = document.getElementById('HEXcopy');
+  const RgbColorCopy = document.getElementById('RGBcopy');
 
   // Button click Random change background color
   btn.addEventListener('click', function () {
-    bgColorChange.style.backgroundColor = generateRandomColor();
-    colorCode.value = generateRandomColor();
+    const color = dacimalColor();
+    const hexColor = genarethexColor(color);
+    const rgbColor = genaretRGBColor(color);
+    bgColorChange.style.backgroundColor = hexColor;
+    hexColorCode.value = hexColor;
+    rgbColorCode.value = rgbColor;
+
     HexColorCopy.innerHTML = 'Copy Now';
+    RgbColorCopy.innerHTML = 'Copy Now';
 
     div.classList.add('animet_out');
     div.addEventListener('animationend', function () {
@@ -22,27 +30,42 @@ function main() {
   });
 
   // Random change background color event
-  bgColorChange.style.backgroundColor = generateRandomColor();
-  colorCode.value = generateRandomColor();
-  colorCode.style.textTransform = 'uppercase';
+  const color = dacimalColor();
+  const hexColor = genarethexColor(color);
+  const rgbColor = genaretRGBColor(color);
+  bgColorChange.style.backgroundColor = hexColor;
+  hexColorCode.value = hexColor;
+  rgbColorCode.value = rgbColor;
+  hexColorCode.style.textTransform = 'uppercase';
 
-  // Color Code copy Event
+  //HEX Color Code copy Event
   HexColorCopy.addEventListener('click', function () {
-    navigator.clipboard.writeText(colorCode.value);
+    navigator.clipboard.writeText(hexColorCode.value);
     HexColorCopy.innerHTML = 'Copied';
     if (div != null) {
       div.remove();
       div = null;
     }
-    if (validHexCode(colorCode.value)) {
-      codeisCopied(`(${colorCode.value}) is copied`);
+    if (validHexCode(hexColorCode.value)) {
+      codeisCopied(`(${hexColorCode.value}) is copied`);
     } else {
       alert` The Color Code Is Not Valid`;
     }
   });
 
+  //RGB Color Code copy Event
+  RgbColorCopy.addEventListener('click', function () {
+    navigator.clipboard.writeText(RgbColorCopy.value);
+    RgbColorCopy.innerHTML = 'Copied';
+    if (div != null) {
+      div.remove();
+      div = null;
+    }
+    return codeisCopied(`(${rgbColorCode.value}) is copied`);
+  });
+
   // Valid color code and change the background color
-  colorCode.addEventListener('keyup', function (e) {
+  hexColorCode.addEventListener('keyup', function (e) {
     const color = e.target.value;
     if (color && validHexCode(color)) {
       bgColorChange.style.backgroundColor = color;
@@ -77,16 +100,50 @@ function validHexCode(color) {
   color = color.substring(1);
   return /^[0-9A-Fa-f]{6}$/i.test(color);
 }
-//  Color code genaret
-function generateRandomColor() {
+
+//  Color Dacimal Value Function
+
+function dacimalColor() {
   const red = Math.floor(Math.random() * 255);
   const blue = Math.floor(Math.random() * 255);
   const green = Math.floor(Math.random() * 255);
-  return `#${red.toString(16)}${green.toString(16)}${blue.toString(16)}`;
+  return { red, blue, green };
 }
 
+//  Color code genaret
+function genarethexColor({ red, blue, green }) {
+  const getTwoCode = (value) => {
+    const hex = value.toString(16);
+    return hex.length === 1 ? `0${hex}` : hex;
+  };
+  return `#${getTwoCode(red)}${getTwoCode(blue)}${getTwoCode(green)}`;
+}
+
+function genaretRGBColor({ red, blue, green }) {
+  return `rgb(${red},${blue},${green})`;
+}
 /*
 
+
+
+==>>Random Hex Color Create Real Way {Not error} 
+
+function dacimalColor() {
+  const red = Math.floor(Math.random() * 255);
+  const blue = Math.floor(Math.random() * 255);
+  const green = Math.floor(Math.random() * 255);
+  return { red, blue, green };
+}
+
+//  Color code genaret
+function generateRandomColor() {
+  const { red, blue, green } = dacimalColor();
+  const gettwoCode = (value) => {
+    const hex = value.toString(16);
+    return hex.length === 1 ? `0${hex}` : hex;
+  };
+  return `#${gettwoCode(red)}${gettwoCode(blue)}${gettwoCode(green)}`;
+}
 
 
 
