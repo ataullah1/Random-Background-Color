@@ -69,6 +69,8 @@ function main() {
     const color = e.target.value;
     if (color && validHexCode(color)) {
       bgColorChange.style.backgroundColor = color;
+      const hasRemoveColorCode = color.substring(1);
+      rgbColorCode.value = HexToRgb(hasRemoveColorCode);
     }
   });
 }
@@ -110,7 +112,7 @@ function dacimalColor() {
   return { red, blue, green };
 }
 
-//  Color code genaret
+// HEX Color code genaret
 function genarethexColor({ red, blue, green }) {
   const getTwoCode = (value) => {
     const hex = value.toString(16);
@@ -119,9 +121,25 @@ function genarethexColor({ red, blue, green }) {
   return `#${getTwoCode(red)}${getTwoCode(blue)}${getTwoCode(green)}`;
 }
 
+// RGB Color code genaret
 function genaretRGBColor({ red, blue, green }) {
   return `rgb(${red},${blue},${green})`;
 }
+
+/**
+ * HEX to RGB color code convert
+ *
+ * @param {string} hex2rgb
+ */
+
+function HexToRgb(hex2rgb) {
+  const red = parseInt(hex2rgb.slice(0, 2), 16);
+  const blue = parseInt(hex2rgb.slice(2, 4), 16);
+  const green = parseInt(hex2rgb.slice(4), 16);
+
+  return `rgb(${red},${blue},${green})`;
+}
+// console.log(HexToRgb('ffffff'));
 /*
 
 
