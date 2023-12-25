@@ -11,13 +11,20 @@ function main() {
   // Button click Random change background color
   btn.addEventListener('click', function () {
     bgColorChange.style.backgroundColor = generateRandomColor();
-    colorCode.value = generateRandomColor().toUpperCase();
+    colorCode.value = generateRandomColor();
     HexColorCopy.innerHTML = 'Copy Now';
+
+    div.classList.add('animet_out');
+    div.addEventListener('animationend', function () {
+      div.remove();
+      div = null;
+    });
   });
 
   // Random change background color event
   bgColorChange.style.backgroundColor = generateRandomColor();
-  colorCode.value = generateRandomColor().toUpperCase();
+  colorCode.value = generateRandomColor();
+  colorCode.style.textTransform = 'uppercase';
 
   // Color Code copy Event
   HexColorCopy.addEventListener('click', function () {
@@ -27,7 +34,19 @@ function main() {
       div.remove();
       div = null;
     }
-    codeisCopied(`(${colorCode.value}) is copied`);
+    if (validHexCode(colorCode.value)) {
+      codeisCopied(`(${colorCode.value}) is copied`);
+    } else {
+      alert` The Color Code Is Not Valid`;
+    }
+  });
+
+  // Valid color code and change the background color
+  colorCode.addEventListener('keyup', function (e) {
+    const color = e.target.value;
+    if (color && validHexCode(color)) {
+      bgColorChange.style.backgroundColor = color;
+    }
   });
 }
 
@@ -35,7 +54,7 @@ function main() {
 
 function codeisCopied(massage) {
   div = document.createElement('div');
-  const className = (div.className = 'toast_massage');
+  div.className = 'toast_massage';
   div.innerText = massage;
   document.body.appendChild(div);
   div.addEventListener('click', function () {
@@ -47,6 +66,17 @@ function codeisCopied(massage) {
   });
 }
 
+// Valid color input. then change the background color
+/**
+ *
+ * @param {string} color
+ */
+function validHexCode(color) {
+  if (color.length != 7) return false;
+  if (color[0] != '#') return false;
+  color = color.substring(1);
+  return /^[0-9A-Fa-f]{6}$/i.test(color);
+}
 //  Color code genaret
 function generateRandomColor() {
   const red = Math.floor(Math.random() * 255);
